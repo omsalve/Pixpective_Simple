@@ -1,0 +1,238 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  background-color: #0a0a0a;
+  color: #ededed;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+}
+
+/* === Logo & Menu === */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  background-color: #fff; /* placeholder */
+}
+
+.menu {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  background-color: #fff; /* placeholder */
+}
+
+/* === Cursor Visual === */
+.cursorxy {
+  position: fixed;
+  bottom: 20px;
+  left: 100px;
+  margin-left: 20px;
+  z-index: 999;
+  width: 200px;
+  height: 100px;
+  background: transparent;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* === Hero Section === */
+.hero {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a;
+  position: relative;
+  text-align: center;
+  padding: 2rem;
+}
+
+.maintxt {
+  max-width: 500px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ededed;
+  margin-bottom: 2rem;
+}
+
+.scroll {
+  display: flex;
+  gap: 6px;
+  height: 20px;
+}
+
+.scroll div {
+  width: 3px;
+  height: 100%;
+  background: #ededed;
+  opacity: 0.3;
+  transition: height 0.3s ease;
+}
+
+/* === Second Page === */
+.second-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+#firstSentence,
+#secondSentence {
+  display: block;
+}
+
+/* === Third Page === */
+.third-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 5rem;
+  font-size: 2rem;
+  background: transparent;
+}
+
+/* === Cards === */
+.cards {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === About Section === */
+.about {
+    display: flex;
+  height: 50vh;
+  background: transparent;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: white;
+  
+}
+ .about div {
+    margin: 10px;
+ }
+/* === Sample Section === */
+.sample {
+  height: 80vh;
+  background: #191919;
+}
+
+/* === Stack / Scroll Bar === */
+.stack {
+  display: grid;
+  grid-template-areas:
+    "title title"
+    "subtitle subtitle"
+    "button button"
+    "grid grid";
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+.stack-title {
+  grid-area: title;
+  font-size: 2rem;
+  color: #00b4d8;
+}
+
+.stack-subtitle {
+  grid-area: subtitle;
+  max-width: 600px;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.stack-btn {
+  grid-area: button;
+  justify-self: start;
+  background: #00b4d8;
+  color: #0a0a0a;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.stack-grid {
+  grid-area: grid;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+    width: 700px;
+    height: 300px;
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+
+
+
+/* === Footer === */
+.footer {
+  height: 200px;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+}
+/* === Scroll Fade Effect === */
+section {
+  opacity: 0;
+  transform: translateZ(100px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateZ(0);
+}
