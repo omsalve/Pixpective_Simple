@@ -16,9 +16,24 @@ body {
   font-family: 'Arial', sans-serif;
   overflow-x: hidden;
 }
-
+@font-face {
+  font-family: 'Brockmann';
+  src: url('/fonts/Brockmann.woff2') format('woff2'),
+       url('/fonts/Brockmann.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
-  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: 'Brockmann', sans-serif;
+  font-size: clamp(1.125rem, 0.4vw + 1rem, 1.5rem);
+  line-height: 1.45;
+  letter-spacing: -0.48px;
+  background-color: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* === Logo & Menu === */
@@ -29,47 +44,226 @@ body {
   z-index: 100;
   width: 40px;
   height: 40px;
-  background-color: #fff; /* placeholder */
+  background-color: transparent;
+}
+.logo img {
+  width: 120px;
+  height: 120px;
 }
 
-.menu {
+.menu-toggle {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 100;
-  width: 40px;
-  height: 40px;
-  background-color: #fff; /* placeholder */
+  background: #1a1a1a;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 999px;
+  font-weight: bold;
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.menu-toggle:hover {
+  outline: 1px solid #aaa;
+}
+.menu-label {
+  font-size: 1rem;
+}
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  background: #00b4ff;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu-icon .bar {
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+.menu-icon .top {
+  transform: translateY(-4px);
+}
+.menu-icon .bottom {
+  transform: translateY(4px);
+}
+.menu-toggle.open .bar.top {
+  transform: rotate(45deg);
+}
+.menu-toggle.open .bar.bottom {
+  transform: rotate(-45deg);
 }
 
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  right: -800px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  justify-content: space-between;
+}
+.sidebar-overlay.open {
+  transform: translateX(0);
+}
+.sidebar-nav a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.sidebar-nav a:hover {
+  color: #00b4ff; /* Optional: add hover effect */
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1a1a;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 999px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.close-btn span {
+  font-size: 1rem;
+}
+.close-icon {
+  background: #00b4ff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 2rem 0;
+}
+.sidebar-footer {
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+.socials {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.X {
+  width: 25px;
+  height: 25px;
+}
+
+.linkedin {
+  width: 30px;
+  height: 30px;
+}
+/* Additional styles from user code remain unchanged */
+
 /* === Cursor Visual === */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 .cursorxy {
   position: fixed;
   bottom: 20px;
-  left: 100px;
-  margin-left: 20px;
+  left: 20px;
   z-index: 999;
-  width: 200px;
-  height: 100px;
+  max-width: 400px;
+  color: white;
+  font-family: 'VT323', monospace;
   background: transparent;
-  mix-blend-mode: difference;
+  padding: 6px 12px;
+  border-radius: 6px;
   pointer-events: none;
-  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 /* === Hero Section === */
 .hero {
+
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #0a0a0a;
-  position: relative;
+  
   text-align: center;
   padding: 2rem;
+
 }
+.scroll-visual {
+  position: absolute;
+  top: calc(100% - 180px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scroll-line {
+  width: 2px;
+  height: 100px;
+  background: #ededed;
+  opacity: 0.7;
+  transition: height 0.1s ease-out;
+  box-shadow: 0 0 4px #00b4ff;
+}
+
+.scroll-icon {
+  font-size: 24px;
+  color: #ededed;
+  margin-top: 6px;
+  font-family: 'VT323', monospace;
+  animation: bounce 1s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
 
 .maintxt {
   max-width: 500px;
@@ -93,6 +287,9 @@ body {
   transition: height 0.3s ease;
 }
 
+/* === Cursor Highlight for Hero Only === */
+
+
 /* === Second Page === */
 .second-page {
   height: 100vh;
@@ -106,15 +303,29 @@ body {
   text-align: center;
   gap: 2rem;
   padding: 2rem;
+  position: relative; /* This lets it scroll out */
+  z-index: 1;
+  opacity: 0;
+  height: 100vh;
+  width: 100%;
+  transition: opacity 0.6s ease;
+  will-change: opacity;
+  margin-bottom: 1px; /* makes sure there's space to scroll */
 }
 
-#firstSentence,
-#secondSentence {
-  display: block;
+.sent {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.show {
+  opacity: 1;
+  transform: translateY(0)
 }
 
 /* === Third Page === */
 .third-page {
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,14 +333,35 @@ body {
   padding: 5rem;
   font-size: 2rem;
   background: transparent;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity: 1s ease, transform: 1s ease;
 }
 
+.third-page p.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 /* === Cards === */
-.cards {
+.card {
+  position: sticky;
+  top: 0;
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 4rem;
+  font-weight: bold;
+  background: #111; /* fallback background */
+  color: #00b4ff;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+  box-shadow: #222;
+}
+
+.card:hover {
+  transform: scale(1.02);
 }
 
 /* === About Section === */
@@ -140,7 +372,6 @@ body {
   font-size: 1.2rem;
   line-height: 1.8;
   color: white;
-  
 }
  .about div {
     margin: 10px;
@@ -153,13 +384,14 @@ body {
 
 /* === Stack / Scroll Bar === */
 .stack {
+    position: relative;
+    overflow: hidden;
   display: grid;
   grid-template-areas:
-    "title title"
-    "subtitle subtitle"
-    "button button"
-    "grid grid";
-  grid-template-columns: 1fr 1fr;
+    "title title subtitle"
+    "title title button"
+    "grid grid grid";
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
   padding: 3rem 2rem;
   background: white;
@@ -196,11 +428,17 @@ body {
   grid-area: grid;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 1.5rem;
   margin-top: 2rem;
+  transition: 1s ease-in-out  ;
 }
 
-.card {
+.stack-card:hover {
+  transform: scale(1.007);
+
+}
+.stack-card {
     width: 700px;
     height: 300px;
   background: #1a1a1a;
@@ -227,7 +465,8 @@ body {
 }
 /* === Scroll Fade Effect === */
 section {
-  opacity: 0;
+    box-shadow: #1a1a1a;
+  opacity: 0.9;
   transform: translateZ(100px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
@@ -236,3 +475,36 @@ section.visible {
   opacity: 1;
   transform: translateZ(0);
 }
+
+/* === Fixed Fade Transition Logic === */
+/* === Page Transition Styles === */
+.hero, 
+.second-page, 
+.third-page {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+  opacity: 0;
+  transform: scale(0.97);
+  z-index: 0;
+}
+
+/* === Active Visibility States === */
+.hero {
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero.fade-out {
+  opacity: 0;
+}
+
+.second-page.fade-in,
+.third-page.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
