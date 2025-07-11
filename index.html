@@ -113,9 +113,19 @@
 
     <!-- Cards & About as Stack -->
     <section class="card-stack">
-      <div class="card" id="insight">INSIGHT</div>
-      <div class="card" id="depth">DEPTH</div>
-      <div class="card" id="drama">DRAMA</div>
+      <div class="card" id="insight">
+        <span class="card-text">INSIGHT</span>
+        <img src="images/pexels-bradleyhook-123335.jpg" alt="" />
+      </div>
+      <div class="card" id="depth">
+        <span class="card-text">DEPTH</span>
+        <img src="images/pexels-fauxels-3183143.jpg" alt="" />
+      </div>
+      <div class="card" id="drama">
+        <span class="card-text">DRAMA</span>
+        <img src="images/pexels-julia-m-cameron-4144146.jpg" alt="" />
+      </div>
+
       <div class="card about" id="about">
         <div class="who">Who We Are</div>
         <div class="progress-container">
@@ -134,7 +144,18 @@
 
     <!-- Sample Visuals Section -->
     <section class="sample">
-      <div>Sample Visuals or Video Placeholder</div>
+       <div class="video-wrapper">
+    <video id="custom-video" playsinline>
+      <source src="images/4010187-uhd_4096_2160_25fps.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="video-controls" id="video-controls">
+      <button id="play-btn" class="vid-btn">▶️</button>
+      <input type="range" id="progress-bar" class="progress-bar" min="0" value="0" step="0.1">
+      <span id="time-display" class="time-display">0:00</span>
+      <button id="mute-btn" class="vid-btn">🔊</button>
+      <button id="fullscreen-btn" class="vid-btn">⛶</button>
     </section>
 
     <!-- Product Stack Section -->

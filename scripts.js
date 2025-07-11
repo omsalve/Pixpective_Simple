@@ -15,7 +15,7 @@ const cursorDisplay = $("#cursorxy");
 const scrollLine = $("#scroll-arrow .scroll-line");
 const scrollIcon = $("#scroll-arrow .scroll-icon");
 const scrollMeter = $("#scroll-meter");
-const progressBar = $("#progress-bar");
+const aboutProgressBar = $("#progress-bar");
 const progressDot = $("#progress-dot");
 const desc = $("#about-desc");
 const logo = $(".logo");
@@ -106,11 +106,11 @@ cards.forEach((card) => cardObserver.observe(card));
 const progressObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      progressBar.style.width = "95%";
+      aboutProgressBar.style.width = "95%";
       progressDot.style.opacity = "1";
       progressDot.style.left = "95%";
     } else {
-      progressBar.style.width = "1%";
+      aboutProgressBar.style.width = "1%";
       progressDot.style.opacity = "0";
       progressDot.style.left = "1%";
     }
@@ -136,3 +136,52 @@ const stackObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 stackObserver.observe(stackSection);
+
+// === Custom Video Player ===
+const video = document.getElementById("custom-video");
+const videoPlayBtn = document.getElementById("play-btn");
+const videoMuteBtn = document.getElementById("mute-btn");
+const videoFullscreenBtn = document.getElementById("fullscreen-btn");
+const videoProgressBar = document.getElementById("video-progress-bar");
+const videoTimeDisplay = document.getElementById("time-display");
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? "0" + secs : secs}`;
+}
+
+videoPlayBtn.addEventListener("click", () => {
+  if (video.paused) {
+    video.play();
+    videoPlayBtn.textContent = "⏸️";
+  } else {
+    video.pause();
+    videoPlayBtn.textContent = "▶️";
+  }
+});
+
+videoMuteBtn.addEventListener("click", () => {
+  video.muted = !video.muted;
+  videoMuteBtn.textContent = video.muted ? "🔇" : "🔊";
+});
+
+videoFullscreenBtn.addEventListener("click", () => {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
+  }
+});
+
+video.addEventListener("timeupdate", () => {
+  videoProgressBar.value = video.currentTime;
+  videoProgressBar.max = video.duration;
+  videoTimeDisplay.textContent = formatTime(video.currentTime);
+});
+
+videoProgressBar.addEventListener("input", () => {
+  video.currentTime = videoProgressBar.value;
+});
