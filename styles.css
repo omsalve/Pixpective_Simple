@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Brockmann';
+  src: url('fonts/brockmann-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Reset */
 * {
   margin: 0;
@@ -76,7 +83,7 @@ body {
 .menu-icon {
   width: 30px;
   height: 30px;
-  background: #00b4ff;
+  background: purple;
   border-radius: 50%;
   position: relative;
   display: flex;
@@ -130,7 +137,7 @@ body {
 }
 
 .sidebar-nav a:hover {
-  color: #00b4ff; /* Optional: add hover effect */
+  color: purple; /* Optional: add hover effect */
 }
 
 .close-btn {
@@ -187,6 +194,14 @@ body {
   width: 30px;
   height: 30px;
 }
+
+.logo.hide,
+.menu-toggle.hide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
 /* Additional styles from user code remain unchanged */
 
 /* === Cursor Visual === */
@@ -208,22 +223,52 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#scroll-meter {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 1.25rem;
+  font-family: 'VT323', monospace;
+  color: purple;
+  z-index: 9999;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+#scroll-bar {
+  width: 100%;
+  background: purple;
+  height: 0%;
+  transition: height 0.1s linear;
+  height: 50% !important;
+  display: block !important;
+  z-index: 9999;
+}
+
+#scroll-percent {
+  position: absolute;
+  top: 50%;
+  left: 150%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  white-space: nowrap;
+}
 
 
 /* === Hero Section === */
 .hero {
-
   height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
   text-align: center;
-  padding: 2rem;
-
+  padding: 1rem;
 }
+
 .scroll-visual {
   position: absolute;
   top: calc(100% - 180px);
@@ -242,7 +287,7 @@ body {
   background: #ededed;
   opacity: 0.7;
   transition: height 0.1s ease-out;
-  box-shadow: 0 0 4px #00b4ff;
+  box-shadow: 0 0 4px purple;
 }
 
 .scroll-icon {
@@ -266,11 +311,25 @@ body {
 
 
 .maintxt {
-  max-width: 500px;
   font-size: 3rem;
   font-weight: bold;
-  color: #ededed;
-  margin-bottom: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-first {
+  color: white;
+  opacity: 1;
+  white-space: nowrap; /* ensures no line breaks */
+}
+
+.hero-second {
+  color: white;
+  opacity: 0.5;
+  white-space: nowrap;
 }
 
 .scroll {
@@ -345,24 +404,22 @@ body {
 /* === Cards === */
 .card {
   position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
+  top: 10vh; /* Push it 10% down from top */
+  height: 80vh;
+  width: 80vw;
+  margin: 0 auto; /* Horizontally center */
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
   font-weight: bold;
-  background: #111; /* fallback background */
-  color: #00b4ff;
-  scroll-snap-align: start;
+  background: #111;
+  color: purple;
+  scroll-snap-align: center;
   transition: transform 0.3s ease;
-  box-shadow: #222;
+  border-radius: 20px;
 }
 
-.card:hover {
-  transform: scale(1.02);
-}
 
 /* === About Section === */
 .about {
@@ -376,6 +433,63 @@ body {
  .about div {
     margin: 10px;
  }
+
+.who {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: unset;
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
+}
+.card.about {
+  height: 100vh;
+  width: 100vw;
+  background: #000;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+}
+.progress-container {
+  width: 200px; /* adjust if needed */
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 1%;
+  background: #ff0033;
+  position: relative;
+  transition: width 1s ease-out;
+  border-radius: 3px;
+}
+
+.progress-dot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: #ff0033;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff0033;
+  opacity: 0;
+  transition: left 1s ease-out, opacity 0.2s ease-in;
+  z-index: 2;
+}
+
+
+
 /* === Sample Section === */
 .sample {
   height: 80vh;
@@ -402,7 +516,7 @@ body {
 .stack-title {
   grid-area: title;
   font-size: 2rem;
-  color: #00b4d8;
+  color: purple;
 }
 
 .stack-subtitle {
@@ -415,7 +529,7 @@ body {
 .stack-btn {
   grid-area: button;
   justify-self: start;
-  background: #00b4d8;
+  background: purple;
   color: #0a0a0a;
   border: none;
   padding: 0.75rem 1.5rem;

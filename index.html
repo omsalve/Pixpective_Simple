@@ -9,15 +9,14 @@
   </head>
   <body>
     <!-- Global UI elements -->
-
     <div class="logo">
       <img
         src="images/299861781_1321473598603972_50412081446120834_n-removebg-preview.png"
-        alt=""
+        alt="Logo"
       />
     </div>
 
-    <!-- New Menu Toggle -->
+    <!-- Menu Toggle -->
     <div class="menu-toggle" id="menu-toggle">
       <span class="menu-label" id="menu-text">Menu</span>
       <div class="menu-icon" id="menu-icon">
@@ -26,6 +25,7 @@
       </div>
     </div>
 
+    <!-- Sidebar -->
     <div class="sidebar-overlay" id="nav-panel">
       <div class="sidebar-nav">
         <a href="#hero">Home</a>
@@ -36,6 +36,7 @@
       <div class="sidebar-footer">
         <p>© 2025 Pixpective — All rights reserved</p>
         <div class="socials">
+          <!-- LinkedIn Icon -->
           <svg
             class="linkedin"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +50,7 @@
             />
           </svg>
 
+          <!-- X Icon -->
           <svg
             class="X"
             xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +64,7 @@
             />
           </svg>
 
+          <!-- Instagram Icon -->
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -69,23 +72,11 @@
             viewBox="0 0 256 256"
             fill="#ffffff"
           >
-            <g
-              fill="#ffffff"
-              fill-rule="nonzero"
-              stroke="none"
-              stroke-width="1"
-              stroke-linecap="butt"
-              stroke-linejoin="miter"
-              stroke-miterlimit="10"
-              font-family="none"
-              font-weight="none"
-              font-size="none"
-              text-anchor="none"
-            >
+            <g fill="#ffffff" fill-rule="nonzero" stroke="none">
               <g transform="scale(10.66667,10.66667)">
                 <path
                   d="M8,3c-2.757,0 -5,2.243 -5,5v8c0,2.757 2.243,5 5,5h8c2.757,0 5,-2.243 5,-5v-8c0,-2.757 -2.243,-5 -5,-5zM8,5h8c1.654,0 3,1.346 3,3v8c0,1.654 -1.346,3 -3,3h-8c-1.654,0 -3,-1.346 -3,-3v-8c0,-1.654 1.346,-3 3,-3zM17,6c-0.55228,0 -1,0.44772 -1,1c0,0.55228 0.44772,1 1,1c0.55228,0 1,-0.44772 1,-1c0,-0.55228 -0.44772,-1 -1,-1zM12,7c-2.757,0 -5,2.243 -5,5c0,2.757 2.243,5 5,5c2.757,0 5,-2.243 5,-5c0,-2.757 -2.243,-5 -5,-5zM12,9c1.654,0 3,1.346 3,3c0,1.654 -1.346,3 -3,3c-1.654,0 -3,-1.346 -3,-3c0,-1.654 1.346,-3 3,-3z"
-                ></path>
+                />
               </g>
             </g>
           </svg>
@@ -95,56 +86,58 @@
 
     <div class="cursorxy" id="cursorxy"></div>
 
-    <!-- Section 1: Hero -->
+    <!-- Hero Section -->
     <section class="section hero" id="hero">
-      <div class="maintxt">There's more to the sport than meets the eye</div>
+      <div class="maintxt">
+        <span class="hero-first">There's more to the sport than</span>
+        <span class="hero-second">meets the eye</span>
+      </div>
       <div class="scroll-visual" id="scroll-arrow">
         <div class="scroll-line"></div>
         <div class="scroll-icon">↓</div>
       </div>
     </section>
 
-    <!-- Section 2: Main Statement -->
+    <!-- Second Statement -->
     <section class="section second-page">
       <div class="sentence-group">
-        <p class="sent first">
-          The action doesn't <br />
-          tell the full story
-        </p>
+        <p class="sent first">The action doesn't tell the full story</p>
         <p class="sent sec">The data does.</p>
       </div>
     </section>
 
-    <!-- Section 3: Teaser -->
+    <!-- Teaser Section -->
     <section class="section third-page">
       <p>We visualise data to give sports coverage more...</p>
     </section>
 
-    <!-- Section 4: Card Highlights -->
+    <!-- Cards & About as Stack -->
     <section class="card-stack">
       <div class="card" id="insight">INSIGHT</div>
       <div class="card" id="depth">DEPTH</div>
       <div class="card" id="drama">DRAMA</div>
-    </section>
-
-    <!-- Section 5: About -->
-    <section class="about" id="about">
-      <div class="who">Who We Are</div>
-      <div class="progress">Progress Visual</div>
-      <div class="desc" style="font-size: x-large">
-        Virtual Eye is quite possibly the biggest sports brand the average fan
-        has never heard of.<br /><br />
-        Our 3D graphics have been viewed by hundreds of millions at the world's
-        biggest sporting events over the last three decades.
+      <div class="card about" id="about">
+        <div class="who">Who We Are</div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar">
+            <div class="progress-dot" id="progress-dot"></div>
+          </div>
+        </div>
+        <div class="desc">
+          Virtual Eye is quite possibly the biggest sports brand the average fan
+          has never heard of.<br /><br />
+          Our 3D graphics have been viewed by hundreds of millions at the
+          world's biggest sporting events over the last three decades.
+        </div>
       </div>
     </section>
 
-    <!-- Section 6: Sample / Showcase -->
+    <!-- Sample Visuals Section -->
     <section class="sample">
       <div>Sample Visuals or Video Placeholder</div>
     </section>
 
-    <!-- Section 7: Scroll Stack / Visualiser -->
+    <!-- Product Stack Section -->
     <section class="stack" id="stack">
       <div class="stack-bg-mask"></div>
       <h2 class="stack-title">→ Product Stack</h2>
