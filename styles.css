@@ -360,36 +360,57 @@
 
   /* === Second Page === */
   .second-page {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    font-size: 3rem;
-    color: white;
-    text-align: center;
-    gap: 2rem;
-    padding: 2rem;
-    position: relative; /* This lets it scroll out */
-    z-index: 1;
-    opacity: 0;
-    height: 100vh;
-    width: 100%;
-    transition: opacity 0.6s ease;
-    will-change: opacity;
-    margin-bottom: 1px; /* makes sure there's space to scroll */
-  }
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  overflow: hidden;
+  margin-bottom: 1px;
+}
 
-  .sent {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 1s ease, transform 1s ease;
-  }
-  .show {
-    opacity: 1;
-    transform: translateY(0)
-  }
+.second-page img {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+
+.sentence-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 90%;
+}
+
+.sent {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
   /* === Third Page === */
   .third-page {

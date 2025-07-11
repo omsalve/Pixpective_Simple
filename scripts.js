@@ -15,15 +15,13 @@ const cursorDisplay = $("#cursorxy");
 const scrollLine = $("#scroll-arrow .scroll-line");
 const scrollIcon = $("#scroll-arrow .scroll-icon");
 const scrollMeter = $("#scroll-meter");
-const aboutProgressBar = $("#progress-bar");
+const aboutProgressBar = $("#about-progress-bar");
 const progressDot = $("#progress-dot");
 const desc = $("#about-desc");
 const logo = $(".logo");
 const stackSection = $("#stack");
 
-let stackTimeout;
-
-// === Menu Toggle Logic ===
+// === Menu Toggle ===
 menuToggle.addEventListener("click", () => {
   const isOpen = navPanel.classList.toggle("open");
   menuText.textContent = isOpen ? "Close" : "Menu";
@@ -32,7 +30,7 @@ menuToggle.addEventListener("click", () => {
     : `<svg width="16" height="16"><line x1="3" y1="6" x2="13" y2="6" stroke="#fff" stroke-width="2"/><line x1="3" y1="10" x2="13" y2="10" stroke="#fff" stroke-width="2"/></svg>`;
 });
 
-// === Close Sidebar When Clicking Outside ===
+// === Close Sidebar Outside Click ===
 document.addEventListener("click", (e) => {
   if (!navPanel.contains(e.target) && !menuToggle.contains(e.target)) {
     navPanel.classList.remove("open");
@@ -41,12 +39,12 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// === Cursor Tracker ===
+// === Cursor Tracking ===
 window.addEventListener("mousemove", (e) => {
   cursorDisplay.textContent = `_cursorx(${Math.round(e.clientX)})_cursory(${Math.round(e.clientY)})_`;
 });
 
-// === Scroll Meter and Arrow Line Logic ===
+// === Scroll Line & Arrow ===
 window.addEventListener("scroll", () => {
   const heroBottom = hero.getBoundingClientRect().bottom;
   const secondTop = secondPage.getBoundingClientRect().top;
@@ -59,10 +57,10 @@ window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const percent = Math.round((scrollTop / docHeight) * 100);
-  scrollMeter.textContent = `→ ${percent}%`;
+  if (scrollMeter) scrollMeter.textContent = `→ ${percent}%`;
 });
 
-// === Page Transition (Hero -> Second -> Third) ===
+// === Section Fade In ===
 const fadeObserver1 = new IntersectionObserver((entries) => {
   const firstSent = secondPage.querySelector(".sent.first");
   const secondSent = secondPage.querySelector(".sent.sec");
@@ -93,7 +91,7 @@ const fadeObserver2 = new IntersectionObserver((entries) => {
 
 fadeObserver2.observe(thirdPage);
 
-// === Card Reveal Animation ===
+// === Card Reveal ===
 const cardObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     entry.target.classList.toggle("visible", entry.isIntersecting);
@@ -102,7 +100,7 @@ const cardObserver = new IntersectionObserver((entries) => {
 
 cards.forEach((card) => cardObserver.observe(card));
 
-// === Progress Bar Logic (About Section) ===
+// === About Progress Bar ===
 const progressObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -119,16 +117,15 @@ const progressObserver = new IntersectionObserver((entries) => {
 
 progressObserver.observe(desc);
 
-// === Hide Logo/Menu on Stack Section Entry ===
+// === Logo Hide on Stack ===
 const stackObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      stackTimeout = setTimeout(() => {
+      setTimeout(() => {
         logo.classList.add("hide");
         menuToggle.classList.add("hide");
       }, 500);
     } else {
-      clearTimeout(stackTimeout);
       logo.classList.remove("hide");
       menuToggle.classList.remove("hide");
     }
@@ -137,7 +134,7 @@ const stackObserver = new IntersectionObserver((entries) => {
 
 stackObserver.observe(stackSection);
 
-// === Custom Video Player ===
+// === Video Controls ===
 const video = document.getElementById("custom-video");
 const videoPlayBtn = document.getElementById("play-btn");
 const videoMuteBtn = document.getElementById("mute-btn");
@@ -167,13 +164,9 @@ videoMuteBtn.addEventListener("click", () => {
 });
 
 videoFullscreenBtn.addEventListener("click", () => {
-  if (video.requestFullscreen) {
-    video.requestFullscreen();
-  } else if (video.webkitRequestFullscreen) {
-    video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) {
-    video.msRequestFullscreen();
-  }
+  if (video.requestFullscreen) video.requestFullscreen();
+  else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+  else if (video.msRequestFullscreen) video.msRequestFullscreen();
 });
 
 video.addEventListener("timeupdate", () => {
@@ -184,4 +177,60 @@ video.addEventListener("timeupdate", () => {
 
 videoProgressBar.addEventListener("input", () => {
   video.currentTime = videoProgressBar.value;
+});
+
+// === Scroll Snap (Fixed) ===
+const sections = document.querySelectorAll("section");
+let isScrolling = false;
+let lastScrollTime = 0;
+
+function getVisibleSectionIndex() {
+  let closestIndex = 0;
+  let minDistance = window.innerHeight;
+
+  sections.forEach((section, i) => {
+    const rect = section.getBoundingClientRect();
+    const distance = Math.abs(rect.top);
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestIndex = i;
+    }
+  });
+
+  return closestIndex;
+}
+
+function scrollToSection(index) {
+  if (index < 0 || index >= sections.length) return;
+  isScrolling = true;
+  sections[index].scrollIntoView({ behavior: "smooth" });
+  setTimeout(() => {
+    isScrolling = false;
+  }, 800);
+}
+
+window.addEventListener("wheel", (e) => {
+  const now = Date.now();
+  if (now - lastScrollTime < 800 || isScrolling) return;
+  lastScrollTime = now;
+
+  const currentIndex = getVisibleSectionIndex();
+  const nextIndex = e.deltaY > 0 ? currentIndex + 1 : currentIndex - 1;
+  scrollToSection(nextIndex);
+});
+// === Smooth Scroll for Menu Links ===
+document.querySelectorAll('.sidebar-nav a').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+
+      // Optional: close sidebar after clicking
+      navPanel.classList.remove('open');
+      menuText.textContent = "Menu";
+      menuIcon.innerHTML = `<svg width="16" height="16"><line x1="3" y1="6" x2="13" y2="6" stroke="#fff" stroke-width="2"/><line x1="3" y1="10" x2="13" y2="10" stroke="#fff" stroke-width="2"/></svg>`;
+    }
+  });
 });
