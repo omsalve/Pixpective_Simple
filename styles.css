@@ -573,12 +573,81 @@ body {
 
 /* === Footer === */
 .footer {
-  height: 200px;
-  background: #0a0a0a;
-  border-top: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 4rem 3rem;
+  background-color: #0a0a0a;
+  color: white;
+  height: 30vh;
+  min-height: 300px;
+  font-family: 'Brockmann', sans-serif;
+  gap: 2rem;
 }
+
+.footer-links {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+
+.footer-links .section {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+
+.footer-links h4 {
+  font-size: 1.1rem;
+  color: #ededed;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.footer-links li:hover {
+  opacity: 1;
+  color: #00b4ff;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-logo {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-logo img {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  opacity: 0.8;
+  object-fit: contain;
+}
+
 /* === Scroll Fade Effect === */
 section {
+  border-radius: 50px;
     box-shadow: #1a1a1a;
   opacity: 0.9;
   transform: translateZ(100px);
