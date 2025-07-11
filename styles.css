@@ -555,7 +555,8 @@ body {
 .stack-card {
     width: 700px;
     height: 300px;
-  background: purple;
+  background: black;
+  color: purple;
   padding: 2rem;
   border-radius: 10px;
   font-weight: bold;
